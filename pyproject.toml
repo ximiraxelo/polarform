@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "polarform"
+version = "0.1.0"
+description = "Represent a complex number in polar form"
+authors = ["Esdras Battosti <esdrasbattostisilva@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.22.1"
+matplotlib = "^3.5.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+mkdocs = "^1.2.3"
+pymdown-extensions = "^9.1"
+mkdocs-material = "^8.1.7"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
