@@ -3,12 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from utils import adjust_angle
 
-RAD_TO_DEG = 180/np.pi
-DEG_TO_RAD = np.pi/180
+RAD_TO_DEG = 180 / np.pi
+DEG_TO_RAD = np.pi / 180
 ORIGIN = [0, 0]
 
-class Polar():
-    '''
+
+class Polar:
+    """
     polar.Polar(mag=0, phase=0)
 
     Represent a complex number in polar form
@@ -23,13 +24,14 @@ class Polar():
     - phase: integer or float
         The phase (angle) of the complex number in degrees
 
-        This parameter, regardless of the input, operates in the interval [-180, 180]  
-    
+        This parameter, regardless of the input, operates in the interval [-180, 180]
+
     Returns:
 
     - Polar: polar
         A polar representantion of a complex number, with magnitude and phase
-    '''
+    """
+
     def __init__(self, mag=0, phase=0):
         if isinstance(mag, complex):
             self.mag = round(abs(mag), 6)
@@ -39,7 +41,7 @@ class Polar():
             self.phase = float(adjust_angle(phase))
 
     def __repr__(self):
-        return f'{self.mag}∠{self.phase}°'
+        return f"{self.mag}∠{self.phase}°"
 
     def __add__(self, operator):
         if isinstance(operator, int) or isinstance(operator, float):
@@ -48,11 +50,14 @@ class Polar():
 
         if isinstance(operator, complex):
             rectangular = self.rect() + operator
-            return Polar(round(abs(rectangular), 6), round(cmath.phase(rectangular) * RAD_TO_DEG, 4))
+            return Polar(
+                round(abs(rectangular), 6),
+                round(cmath.phase(rectangular) * RAD_TO_DEG, 4),
+            )
 
         if isinstance(operator, Polar):
             rectangular = self.rect() + operator.rect()
-            return Polar(abs(rectangular), cmath.phase(rectangular) * RAD_TO_DEG) 
+            return Polar(abs(rectangular), cmath.phase(rectangular) * RAD_TO_DEG)
 
     def __radd__(self, operator):
         if isinstance(operator, int) or isinstance(operator, float):
@@ -61,7 +66,10 @@ class Polar():
 
         if isinstance(operator, complex):
             rectangular = self.rect() + operator
-            return Polar(round(abs(rectangular), 6), round(cmath.phase(rectangular) * RAD_TO_DEG, 4))
+            return Polar(
+                round(abs(rectangular), 6),
+                round(cmath.phase(rectangular) * RAD_TO_DEG, 4),
+            )
 
     def __sub__(self, operator):
         if isinstance(operator, int) or isinstance(operator, float):
@@ -70,7 +78,10 @@ class Polar():
 
         if isinstance(operator, complex):
             rectangular = self.rect() - operator
-            return Polar(round(abs(rectangular), 6), round(cmath.phase(rectangular) * RAD_TO_DEG, 4))
+            return Polar(
+                round(abs(rectangular), 6),
+                round(cmath.phase(rectangular) * RAD_TO_DEG, 4),
+            )
 
         if isinstance(operator, Polar):
             rectangular = self.rect() - operator.rect()
@@ -83,7 +94,10 @@ class Polar():
 
         if isinstance(operator, complex):
             rectangular = self.rect() - operator
-            return Polar(round(abs(rectangular), 6), round(cmath.phase(rectangular) * RAD_TO_DEG, 4))
+            return Polar(
+                round(abs(rectangular), 6),
+                round(cmath.phase(rectangular) * RAD_TO_DEG, 4),
+            )
 
     def __mul__(self, operator):
         if isinstance(operator, int) or isinstance(operator, float):
@@ -92,7 +106,7 @@ class Polar():
 
         if isinstance(operator, complex):
             mag_res = self.mag * abs(operator)
-            phase_res = self.phase + cmath.phase(operator)*RAD_TO_DEG
+            phase_res = self.phase + cmath.phase(operator) * RAD_TO_DEG
             return Polar(round(mag_res, 6), round(phase_res, 4))
 
         if isinstance(operator, Polar):
@@ -107,7 +121,7 @@ class Polar():
 
         if isinstance(operator, complex):
             mag_res = self.mag * abs(operator)
-            phase_res = self.phase + cmath.phase(operator)*RAD_TO_DEG
+            phase_res = self.phase + cmath.phase(operator) * RAD_TO_DEG
             return Polar(round(mag_res, 6), round(phase_res, 4))
 
     def __truediv__(self, operator):
@@ -117,7 +131,7 @@ class Polar():
 
         if isinstance(operator, complex):
             mag_res = self.mag / abs(operator)
-            phase_res = self.phase - cmath.phase(operator)*RAD_TO_DEG
+            phase_res = self.phase - cmath.phase(operator) * RAD_TO_DEG
             return Polar(round(mag_res, 6), round(phase_res, 4))
 
         if isinstance(operator, Polar):
@@ -132,12 +146,12 @@ class Polar():
 
         if isinstance(operator, complex):
             mag_res = self.mag / abs(operator)
-            phase_res = self.phase - cmath.phase(operator)*RAD_TO_DEG
+            phase_res = self.phase - cmath.phase(operator) * RAD_TO_DEG
             return Polar(round(mag_res, 6), round(phase_res, 4))
 
     def __pow__(self, operator):
         if operator >= 0 and isinstance(operator, int):
-            mag_res = (self.mag ** operator)
+            mag_res = self.mag ** operator
             phase_res = adjust_angle(self.phase * operator)
             return Polar(mag_res, phase_res)
 
@@ -154,7 +168,9 @@ class Polar():
             return False
 
         if isinstance(operator, complex):
-            if (self.mag == abs(operator)) and (self.phase == cmath.phase(operator) * RAD_TO_DEG):
+            if (self.mag == abs(operator)) and (
+                self.phase == cmath.phase(operator) * RAD_TO_DEG
+            ):
                 return True
             return False
 
@@ -165,7 +181,9 @@ class Polar():
             return True
 
         if isinstance(operator, complex):
-            if (self.mag == abs(operator)) and (self.phase == cmath.phase(operator) * RAD_TO_DEG):
+            if (self.mag == abs(operator)) and (
+                self.phase == cmath.phase(operator) * RAD_TO_DEG
+            ):
                 return False
             return True
 
@@ -178,24 +196,24 @@ class Polar():
         if index == 1:
             return self.phase
         else:
-            raise IndexError(f'the index {index} is out of range (0 or 1)')
+            raise IndexError(f"the index {index} is out of range (0 or 1)")
 
     def rad(self):
-        '''
+        """
         Polar.rad()
 
         Show the polar form with the phase in radians
 
         Will always be in the interval [-π/2, π/2]
 
-        Returns: 
+        Returns:
 
         - radians_form: string
-        '''
-        return f'{self.mag}∠{self.phase*DEG_TO_RAD} rad'
+        """
+        return f"{self.mag}∠{self.phase*DEG_TO_RAD} rad"
 
     def rect(self):
-        '''
+        """
         Polar.rect()
 
         A rectangular representation of the polar form of the number
@@ -204,13 +222,13 @@ class Polar():
 
         - polar_form: complex
             A number in the form a + bj, where a and b can be integers or floats, and j represents the imaginary unit
-        '''
-        mag_abs = round(self.mag * np.cos(self.phase * DEG_TO_RAD),6)
-        phase_abs = round(self.mag * np.sin(self.phase * DEG_TO_RAD),6)
-        return complex(mag_abs, phase_abs) 
+        """
+        mag_abs = round(self.mag * np.cos(self.phase * DEG_TO_RAD), 6)
+        phase_abs = round(self.mag * np.sin(self.phase * DEG_TO_RAD), 6)
+        return complex(mag_abs, phase_abs)
 
     def conj(self):
-        '''
+        """
         Polar.conj()
 
         The complex conjugate of the polar form
@@ -220,24 +238,29 @@ class Polar():
         Returns:
 
         - conjugate: polar
-        '''
+        """
         return Polar(self.mag, -self.phase)
 
-    def show(self, color='r', grid=True):
+    def show(self, color="r", grid=True):
         mag_abs = self.mag * np.cos(self.phase * DEG_TO_RAD)
         phase_abs = self.mag * np.sin(self.phase * DEG_TO_RAD)
         lim = abs(np.ceil(self.mag * 1.2))
         plt.xlim(-lim, lim)
         plt.ylim(-lim, lim)
-        plt.ylabel('Im', fontfamily='serif', fontsize=14)
-        plt.xlabel('Re', fontfamily='serif', fontsize=14)
-        if grid == True: plt.grid(linewidth=0.3) 
-        plt.quiver(*ORIGIN, mag_abs, phase_abs, 
-                    scale=1, 
-                    scale_units='xy',
-                    angles='xy', 
-                    color=color, 
-                    minshaft=3, 
-                    zorder=2.5)
-        plt.plot(*ORIGIN, '.k', zorder=3)
+        plt.ylabel("Im", fontfamily="serif", fontsize=14)
+        plt.xlabel("Re", fontfamily="serif", fontsize=14)
+        if grid:
+            plt.grid(linewidth=0.3)
+        plt.quiver(
+            *ORIGIN,
+            mag_abs,
+            phase_abs,
+            scale=1,
+            scale_units="xy",
+            angles="xy",
+            color=color,
+            minshaft=3,
+            zorder=2.5,
+        )
+        plt.plot(*ORIGIN, ".k", zorder=3)
         plt.show()
