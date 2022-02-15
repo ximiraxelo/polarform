@@ -5,7 +5,24 @@ repos:
     -   id: black
         args: [--safe]
 
+-   repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        name: isort (python)
+
 -   repo: https://github.com/pycqa/flake8
     rev: 4.0.1
     hooks: 
     -   id: flake8
+        exclude: polarform/__init__.py
+
+-   repo: local
+    hooks: 
+    -   id: pytest
+        name: Pytest
+        entry: poetry run pytest
+        pass_filenames: false
+        language: system
+        types: [python]
+        stages: [push]
