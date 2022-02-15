@@ -44,7 +44,7 @@ class Polar:
         return f"{self.mag}∠{self.phase}°"
 
     def __add__(self, operator):
-        if isinstance(operator, int) or isinstance(operator, float):
+        if isinstance(operator, (int, float)):
             rectangular = self.rect() + operator
             return Polar(abs(rectangular), cmath.phase(rectangular) * RAD_TO_DEG)
 
@@ -60,7 +60,7 @@ class Polar:
             return Polar(abs(rectangular), cmath.phase(rectangular) * RAD_TO_DEG)
 
     def __radd__(self, operator):
-        if isinstance(operator, int) or isinstance(operator, float):
+        if isinstance(operator, (int, float)):
             rectangular = self.rect() + operator
             return Polar(abs(rectangular), cmath.phase(rectangular) * RAD_TO_DEG)
 
@@ -72,7 +72,7 @@ class Polar:
             )
 
     def __sub__(self, operator):
-        if isinstance(operator, int) or isinstance(operator, float):
+        if isinstance(operator, (int, float)):
             rectangular = self.rect() - operator
             return Polar(abs(rectangular), cmath.phase(rectangular) * RAD_TO_DEG)
 
@@ -88,7 +88,7 @@ class Polar:
             return Polar(abs(rectangular), cmath.phase(rectangular) * RAD_TO_DEG)
 
     def __rsub__(self, operator):
-        if isinstance(operator, int) or isinstance(operator, float):
+        if isinstance(operator, (int, float)):
             rectangular = self.rect() - operator
             return Polar(abs(rectangular), cmath.phase(rectangular) * RAD_TO_DEG)
 
@@ -100,7 +100,7 @@ class Polar:
             )
 
     def __mul__(self, operator):
-        if isinstance(operator, int) or isinstance(operator, float):
+        if isinstance(operator, (int, float)):
             mag_res = self.mag * operator
             return Polar(mag_res, self.phase)
 
@@ -115,7 +115,7 @@ class Polar:
             return Polar(mag_res, phase_res)
 
     def __rmul__(self, operator):
-        if isinstance(operator, int) or isinstance(operator, float):
+        if isinstance(operator, (int, float)):
             mag_res = self.mag * operator
             return Polar(mag_res, self.phase)
 
@@ -125,7 +125,7 @@ class Polar:
             return Polar(round(mag_res, 6), round(phase_res, 4))
 
     def __truediv__(self, operator):
-        if isinstance(operator, int) or isinstance(operator, float):
+        if isinstance(operator, (int, float)):
             mag_res = self.mag / operator
             return Polar(mag_res, self.phase)
 
@@ -140,7 +140,7 @@ class Polar:
             return Polar(mag_res, phase_res)
 
     def __rtruediv__(self, operator):
-        if isinstance(operator, int) or isinstance(operator, float):
+        if isinstance(operator, (int, float)):
             mag_res = self.mag / operator
             return Polar(mag_res, self.phase)
 
