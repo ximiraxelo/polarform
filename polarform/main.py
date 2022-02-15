@@ -1,7 +1,9 @@
 import cmath
-import numpy as np
+
 import matplotlib.pyplot as plt
-from utils import adjust_angle
+import numpy as np
+
+from polarform.utils import adjust_angle
 
 RAD_TO_DEG = 180 / np.pi
 DEG_TO_RAD = np.pi / 180
