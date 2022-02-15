@@ -189,8 +189,8 @@ class Polar:
                 return False
             return True
 
-    def __round__(self, n=0):
-        return Polar(round(self.mag, n), round(self.phase, n))
+    def __round__(self, ndigits=0):
+        return Polar(round(self.mag, ndigits), round(self.phase, ndigits))
 
     def __getitem__(self, index):
         if index == 0:
