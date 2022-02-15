@@ -43,7 +43,7 @@ class Polar:
             self.phase = float(adjust_angle(phase))
 
     def __repr__(self):
-        return f"{self.mag}∠{self.phase}°"
+        return f"Polar({self.mag}, {self.phase})"
 
     def __add__(self, operator):
         if isinstance(operator, (int, float)):
